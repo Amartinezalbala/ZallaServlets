@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+body {
+	font-family: comic-sans, Arial,monospace, serif;
+}
+label {
+	display: inline-block;
+	width: 6em;
+}
+input {
+	width: 10em;
+}
+.errores {
+	color: red;
+	font-weight: bold;
+	font-variant: small-caps;
+}
+header, footer {
+	background-color:red;
+}
