@@ -2,6 +2,7 @@ package com.ipartek.formacion.alvaromartinez.controladores;
 
 import java.io.IOException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -43,11 +44,19 @@ public class LoginServlet extends HttpServlet {
 		usuario.setPass(pass);
 
 		// Llamada a lógica de negocio
-		UsuariosDAL usuarioDAL = new UsuariosDALFijo();
+		// UsuariosDAL usuarioDAL = new UsuariosDALFijo();
+
+		ServletContext application = request.getServletContext();
+
+		UsuariosDAL usuariosDAL = (UsuariosDAL) application.getAttribute(AltaServlet.USUARIOS_DAL);
+
+		if (usuariosDAL == null) {
+			usuariosDAL = new UsuariosDALFijo();
+		}
 
 		// Sólo para crear una base de datos falsa con el
 		// contenido de un usuario "javi", "lete"
-		usuarioDAL.alta(new Usuario("alvaro", "27101983"));
+		// usuarioDAL.alta(new Usuario("alvaro", "27101983"));
 
 		HttpSession session = request.getSession();
 		session.setMaxInactiveInterval(TIEMPO_INACTIVIDAD);
@@ -57,7 +66,7 @@ public class LoginServlet extends HttpServlet {
 		response.addCookie(cookie);
 
 		// ESTADOS
-		boolean esValido = usuarioDAL.validar(usuario);
+		boolean esValido = usuariosDAL.validar(usuario);
 
 		boolean sinParametros = usuario.getNombre() == null;
 

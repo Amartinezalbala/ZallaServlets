@@ -62,6 +62,9 @@ public class AltaServlet extends HttpServlet {
 
 				usuariosDAL.alta(usuario);
 				application.setAttribute(USUARIOS_DAL, usuariosDAL);
+
+				request.getRequestDispatcher("/login").forward(request, response);
+				return;
 			}
 		}
 		request.getRequestDispatcher(RUTA_ALTA).forward(request, response);
