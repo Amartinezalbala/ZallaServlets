@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ipartek.ejemplos.alvaromartinez.DAL.DALFactory;
 import com.ipartek.ejemplos.alvaromartinez.DAL.UsuariosDAL;
-import com.ipartek.ejemplos.alvaromartinez.DAL.UsuariosDALFijo;
 import com.ipartek.ejemplos.alvaromartinez.tipos.Usuario;
 
 @WebServlet("/alta")
@@ -57,7 +57,7 @@ public class AltaServlet extends HttpServlet {
 				UsuariosDAL usuariosDAL = (UsuariosDAL) application.getAttribute(USUARIOS_DAL);
 
 				if (usuariosDAL == null) {
-					usuariosDAL = new UsuariosDALFijo();
+					usuariosDAL = DALFactory.getUsuriosDAL();
 				}
 
 				usuariosDAL.alta(usuario);

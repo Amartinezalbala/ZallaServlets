@@ -2,7 +2,7 @@ package com.ipartek.ejemplos.alvaromartinez.DAL;
 
 import com.ipartek.ejemplos.alvaromartinez.tipos.Usuario;
 
-public class UsuariosDALFijo implements UsuariosDAL {
+public class UsuariosDALUsuarioUnico implements UsuariosDAL {
 
 	private Usuario usuario;
 

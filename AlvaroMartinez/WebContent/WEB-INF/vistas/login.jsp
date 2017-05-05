@@ -13,7 +13,7 @@
 				name="pass" />
 		</fieldset>
 		<fieldset>
-			<input type="submit" value="Login" />
+			<input type="submit" value="LOGIN" />
 			<p class="errores">${usuario.errores }</p>
 		</fieldset>
 	</form>
