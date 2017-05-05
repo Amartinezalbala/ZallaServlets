@@ -9,7 +9,16 @@
 </head>
 <body>
 	<header>
-	<h1>EJEMPLO MVC</h1>
+	<h2>EJEMPLO MVC</h2>
 	<p>EJEMPLOS DE USO DE MVC
 	<h5><%= new java.util.Date() %></h5> </p>
 	</header>
+	<nav>
+	<ul>
+			<li><a href="alta">ALTA</a></li>
+			
+			<li><a href="login">LOGIN</a></li>
+			
+			<li><a href="login?opcion=logout">SALIR</a></li>
+		</ul>
+	</nav>

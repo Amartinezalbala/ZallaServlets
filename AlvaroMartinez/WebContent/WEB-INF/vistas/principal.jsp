@@ -1,5 +1,5 @@
 <%@include file="includes/cabecera.jsp" %>
-	<h2>Principal</h2>
+	<h2>PRINCIPAL</h2>
 	<jsp:useBean id="usuario" scope="session" 
 	class ="com.ipartek.ejemplos.alvaromartinez.tipos.Usuario"/>
 	<h1>Bienvenido ${usuario.nombre}  </h1>

@@ -1,15 +1,11 @@
 @CHARSET "UTF-8";
 body {
-	font-family: comic-sans, Arial;
 	font-weight: bold;
+	font-family: Arial, sans-serif, sans-comic; 
 }
 label {
 	display: inline-block;
-	font-weight: bold;
-	width: 6em;
-}
-button{
-	font-weight: bold;
+	width: 8em;
 }
 input {
 	width: 10em;
@@ -19,8 +15,50 @@ input {
 	font-weight: bold;
 	font-variant: small-caps;
 }
-header, footer {
-	background-color:lightcoral;
+
+nav {
+    background-color: lightgreen;
+    font-weight:bold;
+    padding: 1em;
+}
+
+ul {
+    padding-left: 0;
+}
+
+li {
+	display: inline-block;
 	font-weight: bold;
+}
+
+input[type=submit], nav a, nav a:visited {
+	text-decoration: none;
+	font-weight: bold;
+	
+	border: 1px solid black;
+	background-color: white;
+	padding: 5px;
+	
+	color: black;
+}
+
+input[type=submit]:hover, nav a:hover {
+	background-color:green;
+	font-weight: bold;
+}
+
+input[type=submit] {
+	background-color: #333666;
+	font-weight: bold;
+	color: white;
+}
+
+header, footer {
+	background-color: lightcoral;
+	font-weight: bold
 	padding: 1em;
+}
+
+fieldset {
+	border: 0;
 }

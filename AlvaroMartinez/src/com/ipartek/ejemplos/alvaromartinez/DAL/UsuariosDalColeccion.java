@@ -12,6 +12,9 @@ public class UsuariosDalColeccion implements UsuariosDAL {
 
 	@Override
 	public void alta(Usuario usuario) {
+		if (usuarios.containsKey(usuario.getNombre())) {
+			throw new UsuarioYaExistenteDALException("USUARIO EXISTENTE: " + usuario.getNombre());
+		}
 		usuarios.put(usuario.getNombre(), usuario);
 
 	}
