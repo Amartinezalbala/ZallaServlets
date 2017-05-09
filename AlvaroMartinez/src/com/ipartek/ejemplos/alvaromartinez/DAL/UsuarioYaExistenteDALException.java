@@ -2,6 +2,8 @@ package com.ipartek.ejemplos.alvaromartinez.DAL;
 
 public class UsuarioYaExistenteDALException extends DALException {
 
+	private static final long serialVersionUID = 3939568776128769104L;
+
 	public UsuarioYaExistenteDALException() {
 		super();
 

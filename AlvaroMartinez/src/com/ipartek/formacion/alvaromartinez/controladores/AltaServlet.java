@@ -46,11 +46,11 @@ public class AltaServlet extends HttpServlet {
 
 		if (hayDatos) {
 			if (!datosCorrectos) {
-				usuario.setErrores("Todos los campos son requeridos y con un mínimo de "
-						+ LoginServlet.MINIMO_CARACTERES + " caracteres");
+				usuario.setErrores("TODOS LOS CAMPOS SON REQUERIDOS Y CON UN MÍNIMO DE "
+						+ LoginServlet.MINIMO_CARACTERES + " CARACTERES.");
 				request.setAttribute("usuario", usuario);
 			} else if (!passIguales) {
-				usuario.setErrores("Las contraseñas deben ser iguales");
+				usuario.setErrores("LAS CONTRASEÑAS TIENEN QUE SER IGUALES.");
 				request.setAttribute("usuario", usuario);
 			} else {
 				ServletContext application = request.getServletContext();

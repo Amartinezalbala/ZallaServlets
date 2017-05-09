@@ -24,4 +24,42 @@ public class UsuariosDalColeccion implements UsuariosDAL {
 		return usuarios.containsValue(usuario);
 	}
 
+	@Override
+	public void modificar(Usuario usuario) {
+		if (!usuarios.containsKey(usuario.getNombre())) {
+			throw new UsuarioYaExistenteDALException("IMPOSIBLE MODIFICAR: " + usuario + " , NO EXISTENTE");
+		}
+		usuarios.put(usuario.getNombre(), usuario);
+
+	}
+
+	@Override
+	public void borrar(Usuario usuario) {
+		usuarios.remove(usuario.getNombre());
+
+	}
+
+	@Override
+	public Usuario buscarPorId(String id) {
+		return usuarios.get(id);
+	}
+
+	@Override
+	public Usuario[] buscarTodosLosUsuarios() {
+
+		return usuarios.values().toArray(new Usuario[usuarios.size()]);
+	}
+
+	@Override
+	public String getNombre() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getPass() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
