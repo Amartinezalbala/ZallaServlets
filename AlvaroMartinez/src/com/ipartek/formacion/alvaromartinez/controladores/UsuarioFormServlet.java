@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ipartek.ejemplos.alvaromartinez.DAL.DALException;
+import com.ipartek.ejemplos.alvaromartinez.DAL.UsuarioYaExistenteDALException;
 import com.ipartek.ejemplos.alvaromartinez.DAL.UsuariosDAL;
 import com.ipartek.ejemplos.alvaromartinez.tipos.Usuario;
 
@@ -19,7 +20,7 @@ public class UsuarioFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		doPost(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
@@ -53,7 +54,14 @@ public class UsuarioFormServlet extends HttpServlet {
 		switch (op) {
 		case "alta":
 			if (pass.equals(pass2)) {
-				dal.alta(usuario);
+				try {
+					dal.alta(usuario);
+				} catch (UsuarioYaExistenteDALException uye) {
+					usuario.setErrores(uye.getMessage());
+					request.setAttribute("usuario", usuario);
+					rutaFormulario.forward(request, response);
+					return;
+				}
 				rutaListado.forward(request, response);
 			} else {
 				usuario.setErrores("Las contraseñas no coinciden");
@@ -87,5 +95,4 @@ public class UsuarioFormServlet extends HttpServlet {
 			break;
 		}
 	}
-
 }

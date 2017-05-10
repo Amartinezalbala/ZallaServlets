@@ -1,14 +1,14 @@
 package com.ipartek.ejemplos.alvaromartinez.DAL;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import com.ipartek.ejemplos.alvaromartinez.tipos.Usuario;
 
 public class UsuariosDalColeccion implements UsuariosDAL {
 
 	// se inicializa el hashmap
-	private Map<String, Usuario> usuarios = new HashMap<String, Usuario>();
+	private Map<String, Usuario> usuarios = new TreeMap<String, Usuario>();
 
 	@Override
 	public void alta(Usuario usuario) {

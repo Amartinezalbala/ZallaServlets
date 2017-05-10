@@ -3,17 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-	<h2>Formulario de usuarios</h2>
+	<h2>FORMULARIO DE USUARIOS</h2>
 	
 	<jsp:useBean id="usuario" scope="request"
 		class="com.ipartek.ejemplos.alvaromartinez.tipos.Usuario" />
 
-	<form action="usuarioform" method="post">
+	<form action="UsuarioForm" method="post">
 		<fieldset>
-			<label for="nombre">Nombre</label> 
+			<label for="nombre">NOMBRE</label> 
 			
 			<input id="nombre" name="nombre"
-			  required="required" minlengt="4" value="${usuario.nombre}" 
+			  required="required" minlength="6" value="${usuario.nombre}" 
 			  
 			  <c:if test="${param.op == 'modificar' or param.op == 'borrar'}">
 			  	readonly="readonly"
@@ -21,11 +21,11 @@
 		  	/>
 		</fieldset>
 		<fieldset>
-			<label for="pass">Contraseña</label> <input type="password" id="pass"
+			<label for="pass">CONTRASEÑA: </label> <input type="password" id="pass"
 				name="pass" />
 		</fieldset>
 		<fieldset>
-			<label for="pass2">Contraseña otra vez</label> <input type="password" id="pass2"
+			<label for="pass2">CONTRASEÑA OTRA VEZ: </label> <input type="password" id="pass2"
 				name="pass2" />
 		</fieldset>
 		<fieldset>
