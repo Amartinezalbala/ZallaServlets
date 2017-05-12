@@ -64,7 +64,7 @@ public class UsuarioFormServlet extends HttpServlet {
 				}
 				rutaListado.forward(request, response);
 			} else {
-				usuario.setErrores("Las contraseñas no coinciden");
+				usuario.setErrores("LAS CONTRASEÑAS NO COINCIDEN");
 				request.setAttribute("usuario", usuario);
 				rutaFormulario.forward(request, response);
 			}
@@ -82,7 +82,7 @@ public class UsuarioFormServlet extends HttpServlet {
 				}
 				rutaListado.forward(request, response);
 			} else {
-				usuario.setErrores("Las contraseñas no coinciden");
+				usuario.setErrores("LAS CONTRASEÑAS NO COINCIDEN");
 				request.setAttribute("usuario", usuario);
 				rutaFormulario.forward(request, response);
 			}

@@ -4,7 +4,7 @@ import com.ipartek.ejemplos.alvaromartinez.tipos.Producto;
 
 public interface ProductosDAL {
 
-	void añadir(Producto producto);
+	void agregar(Producto producto);
 
 	public void modificar(Producto producto);
 

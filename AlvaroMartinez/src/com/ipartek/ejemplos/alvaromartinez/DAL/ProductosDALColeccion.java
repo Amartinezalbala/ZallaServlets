@@ -10,10 +10,11 @@ public class ProductosDALColeccion implements ProductosDAL {
 	private Map<Integer, Producto> productos = new TreeMap<Integer, Producto>();
 
 	@Override
-	public void añadir(Producto producto) {
+	public void agregar(Producto producto) {
 		if (productos.containsKey(producto.getId())) {
 			throw new ProductoYaExistenteDALException("PRODUCTO EXISTENTE: " + producto.getNombre());
 		}
+
 		productos.put(producto.getId(), producto);
 	}
 
@@ -24,15 +25,16 @@ public class ProductosDALColeccion implements ProductosDAL {
 
 	@Override
 	public void modificar(Producto producto) {
-		if (!productos.containsKey(producto.getNombre())) {
-			throw new ProductoYaExistenteDALException("IMPOSIBLE MODIFICAR: " + producto + " , NO EXISTENTE");
+		if (!productos.containsKey(producto.getId())) {
+			throw new ProductoYaExistenteDALException("IMPOSIBLE MODIFICAR: " + producto.getNombre()
+					+ " , NO EXISTENTE");
 		}
 		productos.put(producto.getId(), producto);
 	}
 
 	@Override
 	public void borrar(Producto producto) {
-		productos.remove(producto).getId();
+		productos.remove(producto.getId());
 
 	}
 

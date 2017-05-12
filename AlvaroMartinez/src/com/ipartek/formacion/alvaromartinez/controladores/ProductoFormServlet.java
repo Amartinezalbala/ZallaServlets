@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ipartek.ejemplos.alvaromartinez.DAL.ProductoYaExistenteDALException;
 import com.ipartek.ejemplos.alvaromartinez.DAL.ProductosDAL;
 import com.ipartek.ejemplos.alvaromartinez.tipos.Producto;
 
@@ -42,8 +43,8 @@ public class ProductoFormServlet extends HttpServlet {
 			precioForm = Double.parseDouble(sPrecio);
 		}
 
-		RequestDispatcher rutaListado = request.getRequestDispatcher(UsuarioCRUDServlet.RUTA_SERVLET_LISTADO);
-		RequestDispatcher rutaFormulario = request.getRequestDispatcher(UsuarioCRUDServlet.RUTA_FORMULARIO);
+		RequestDispatcher rutaListado = request.getRequestDispatcher(ProductoCRUDServlet.RUTA_SERVLET_LISTADO);
+		RequestDispatcher rutaFormulario = request.getRequestDispatcher(ProductoCRUDServlet.RUTA_FORMULARIO);
 
 		if (op == null) {
 			rutaListado.forward(request, response);
@@ -56,10 +57,16 @@ public class ProductoFormServlet extends HttpServlet {
 		ProductosDAL dal = (ProductosDAL) application.getAttribute("dal");
 
 		switch (op) {
-		case "añadir":
-			dal.añadir(producto);
+		case "agregar":
+			try {
+				dal.agregar(producto);
+			} catch (ProductoYaExistenteDALException pye) {
+				producto.setErrores(pye.getMessage());
+				request.setAttribute("producto", producto);
+				rutaFormulario.forward(request, response);
+				return;
+			}
 			rutaListado.forward(request, response);
-
 			break;
 		case "modificar":
 			dal.modificar(producto);

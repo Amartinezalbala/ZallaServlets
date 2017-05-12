@@ -15,8 +15,8 @@
 	</header>
 	<nav>
 	<ul>
-			<li><a href="?op=añadir">AÑADIR</a></li>
-			<li><a href="UsuarioCRUD">LISTA DE PRODUCTOS</a></li>
+			<li><a href="?op=agregar">AGREGAR</a></li>
+			<li><a href="productocrud">LISTA DE PRODUCTOS</a></li>
 			<li><a href="login?opcion=logout">SALIR</a></li>
 		</ul>
 	</nav>

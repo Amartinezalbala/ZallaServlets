@@ -30,6 +30,6 @@
 
 
 
-<a href="?op=añadir">AÑADIR</a>
+<a href="?op=agregar">AGREGAR</a>
 
 <%@ include file="includes/pie.jsp"%>

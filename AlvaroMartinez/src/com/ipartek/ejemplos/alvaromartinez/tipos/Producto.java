@@ -2,7 +2,16 @@ package com.ipartek.ejemplos.alvaromartinez.tipos;
 
 public class Producto {
 	int id;
-	String nombre;
+	String nombre, errores;
+
+	public String getErrores() {
+		return errores;
+	}
+
+	public void setErrores(String errores) {
+		this.errores = errores;
+	}
+
 	double precio;
 
 	public int getId() {

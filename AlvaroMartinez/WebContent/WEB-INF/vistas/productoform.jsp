@@ -13,7 +13,7 @@
 			<label for="id">ID</label> 
 			
 			<input id="id" name="id"
-			  required="required" minlength="3" value="${producto.id}" 
+			  required="required" minlength="4" value="${producto.id}" 
 			  
 			  <c:if test="${param.op == 'modificar' or param.op == 'borrar'}">
 			  	readonly="readonly"
@@ -21,16 +21,16 @@
 		  	/>
 		</fieldset>
 		<fieldset>
-			<label for="nombre">NOMBRE: </label> <input type="text" id="nombre"
-				name="nombre" />
+			<label for="nombre">NOMBRE: </label> <input type="text" id="nombre" 
+				 name="nombre" value="${producto.nombre}" />
 		</fieldset>
 		<fieldset>
-			<label for="precio">PRECIO: </label> <input type="number" id="precio"
-				name="precio" />
+			<label for="precio">PRECIO: </label> <input type="text" id="precio"
+				name="precio" value="${producto.precio}"/>
 		</fieldset>
 		<fieldset>
 			<input type="submit" value="${fn:toUpperCase(param.op)}" />
-			
+			<p class="errores">${producto.errores}</p>
 			
 			<input type="hidden" name="opform" value="${param.op}" />
 		</fieldset>

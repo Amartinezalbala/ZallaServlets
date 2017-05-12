@@ -34,8 +34,11 @@ public class ProductoCRUDServlet extends HttpServlet {
 		if (dal == null) {
 			dal = ProductosDALFactory.getProductosDAL();
 
-			dal.añadir(new Producto(000, "producto0", 0.0));
-			dal.añadir(new Producto(001, "producto1", 1.0));
+			dal.agregar(new Producto(0, "Boligrafo BIC Blanco", 1.00));
+			dal.agregar(new Producto(1, "Boligrafo BIC Azul", 1.00));
+			dal.agregar(new Producto(2, "Boligrafo BIC Negro", 1.00));
+			dal.agregar(new Producto(3, "Boligrafo BIC Rojo", 1.00));
+			dal.agregar(new Producto(4, "Boligrafo BIC Verde", 1.00));
 			application.setAttribute("dal", dal);
 		}
 
@@ -58,7 +61,7 @@ public class ProductoCRUDServlet extends HttpServlet {
 			case "borrar":
 				producto = dal.buscarPorId(Integer.parseInt(id));
 				request.setAttribute("producto", producto);
-			case "alta":
+			case "agregar":
 				request.getRequestDispatcher(RUTA_FORMULARIO).forward(request, response);
 				break;
 			default:
