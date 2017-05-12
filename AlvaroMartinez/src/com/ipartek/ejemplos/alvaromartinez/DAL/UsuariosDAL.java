@@ -15,8 +15,4 @@ public interface UsuariosDAL {
 
 	boolean validar(Usuario usuario);
 
-	String getNombre();
-
-	String getPass();
-
 }

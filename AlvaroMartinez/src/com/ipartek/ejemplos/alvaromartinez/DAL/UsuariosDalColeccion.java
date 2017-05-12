@@ -50,16 +50,4 @@ public class UsuariosDalColeccion implements UsuariosDAL {
 		return usuarios.values().toArray(new Usuario[usuarios.size()]);
 	}
 
-	@Override
-	public String getNombre() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getPass() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

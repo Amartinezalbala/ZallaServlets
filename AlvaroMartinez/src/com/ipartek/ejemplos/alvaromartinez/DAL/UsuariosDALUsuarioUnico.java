@@ -46,16 +46,4 @@ public class UsuariosDALUsuarioUnico implements UsuariosDAL {
 		return null;
 	}
 
-	@Override
-	public String getNombre() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getPass() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
