@@ -34,8 +34,10 @@ public class ProductosDALColeccion implements ProductosDAL {
 
 	@Override
 	public void borrar(Producto producto) {
+		if (!productos.containsKey(producto.getId())) {
+			throw new ProductosDALException("PRODUCTO NO EXISTENTE");
+		}
 		productos.remove(producto.getId());
-
 	}
 
 	@Override
