@@ -17,6 +17,6 @@
 	<ul>
 			<li><a href="?op=agregar">AGREGAR</a></li>
 			<li><a href="productocrud">LISTA DE PRODUCTOS</a></li>
-			<li><a href="login?opcion=logout">SALIR</a></li>
+			<li><a href="productocrud">SALIR</a></li>
 		</ul>
 	</nav>
