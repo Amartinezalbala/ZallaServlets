@@ -2,8 +2,7 @@ package com.ipartek.formacion.ejemplojdbc.DAO;
 
 import com.ipartek.formacion.ejemplojdbc.Tipos.Rol;
 
-
-public interface RolDAO {
+public interface RolDAO extends IpartekDAO {
 	public Rol[] findAll();
 
 	public Rol findById(int id);

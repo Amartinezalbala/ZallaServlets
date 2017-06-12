@@ -7,46 +7,69 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.ipartek.formacion.ejemplojdbc.DAO.DAOException;
-import com.ipartek.formacion.ejemplojdbc.DAO.UsuarioDAO;
-import com.ipartek.formacion.ejemplojdbc.DAO.UsuarioDAOMySQL;
+import com.ipartek.formacion.ejemplojdbc.DAO.RolDAO;
+import com.ipartek.formacion.ejemplojdbc.DAO.RolDAOMySQL;
+import com.ipartek.formacion.ejemplojdbc.Tipos.Rol;
 
 public class App {
 	public static void main(String[] args) {
 		try {
-			UsuarioDAO dao = new UsuarioDAOMySQL();
+			// Comprobaciones DAO
+			// UsuarioDAO daoUsuarios = new UsuarioDAOMySQL();
+			// daoUsuarios.abrir();
+			RolDAO daoRoles = new RolDAOMySQL();
+			daoRoles.abrir();
 
 			// comprobacion de FindAll
-			// for (Usuario u : dao.findAll())
+			// for (Usuario u : daoUsuarios.findAll())
 			// System.out.println(u);
+			for (Rol r : daoRoles.findAll())
+				System.out.println(r);
 
 			// Comprobacion de FindById
 			// int id = 3;
-			// Usuario usuario = dao.findById(id);
+			// Usuario usuario = daoUsuarios.findById(id);
 			// System.out.println("Usuario ID: " + id + " = " + usuario);
+			int id = 1;
+			Rol rol = daoRoles.findById(id);
+			System.out.println("Rol ID: " + id + " = " + rol);
 
-			// comprobacion de insert
-			// Usuario usuario = new Usuario(0, 2, "Prueba_Java", "PJPass",
-			// "Prueba_Eclipse");
-			// dao.insert(usuario);
-			// System.out.println(dao.findById(5));
+			// Comprobación insert
+			// Usuario usuario0 = new Usuario(0, 3, "PruebaUsuarios", "PUPass",
+			// "PruebaEclipse");
+			// daoUsuarios.insert(usuario0);
+			// System.out.println(daoUsuarios.findById(9));
+			Rol rol0 = new Rol(0, "empleaducho", "PruebaEclipse");
+			daoRoles.insert(rol0);
+			System.out.println(daoRoles.findById(4));
 
 			// comprobacion de update
-			// Usuario usuario = new Usuario(5, 2, "Actualizado Updatez",
+			// Usuario usuario1 = new Usuario(5, 2, "Actualizado Updatez",
 			// "actuaPass", "Updating");
-			// dao.update(usuario);
-			// System.out.println(dao.findById(5));
+			// daoUsuarios.update(usuario1);
+			// System.out.println(daoUsuarios.findById(5));
+			Rol rol1 = new Rol(4, "vedel", "PruebaEclipse");
+			daoRoles.insert(rol1);
+			System.out.println(daoRoles.findById(4));
 
 			// comprobacion de delete
-			// Usuario usuario = new Usuario(5, 2, "Actualizado Updatez",
+			// Usuario usuario2 = new Usuario(5, 2, "Actualizado Updatez",
 			// "actuaPass", "Updating");
-			// dao.delete(usuario);
-			// System.out.println("Eliminado el registro: " + usuario);
+			// daoUsuarios.delete(usuario2);
+			// System.out.println("Eliminado el registro: " + usuario2);
+			Rol rol2 = new Rol(0, "vedel", "PruebaEclipse");
+			daoRoles.delete(rol2);
+			System.out.println("ELIMINADO EL REGISTRO: " + rol2);
 
 			// comprobacion de deleteID
-			int id = 4;
-			// Usuario usuario = dao.findById(id);
-			dao.delete(id);
-			System.out.println("Eliminado el registro número " + id);
+			// int id1 = 8;
+			// daoUsuarios.findById(id1);
+			// daoUsuarios.delete(id1);
+			// System.out.println("Eliminado el registro número " + id1);
+			int id1 = 3;
+			daoRoles.findById(id1);
+			daoRoles.delete(id1);
+			System.out.println("Eliminado el registro número " + id1);
 
 		} catch (DAOException e) {
 			e.printStackTrace();

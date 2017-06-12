@@ -2,7 +2,7 @@ package com.ipartek.formacion.ejemplojdbc.DAO;
 
 import com.ipartek.formacion.ejemplojdbc.Tipos.Factura;
 
-public interface FacturaDAO {
+public interface FacturaDAO extends IpartekDAO {
 	public Factura[] findAll();
 
 	public Factura findById(int id);

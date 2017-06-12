@@ -34,7 +34,7 @@ public class RolDAOMySQL extends IpartekDAOMySQL implements RolDAO {
 
 				rol.setId(rs.getInt("id"));
 				rol.setRol(rs.getString("rol"));
-				rol.setDescripcion(rs.getString("nombre_completo"));
+				rol.setDescripcion(rs.getString("descripcion"));
 
 				roles.add(rol);
 			}
@@ -62,7 +62,7 @@ public class RolDAOMySQL extends IpartekDAOMySQL implements RolDAO {
 
 				rol.setId(rs.getInt("id"));
 				rol.setRol(rs.getString("rol"));
-				rol.setDescripcion(rs.getString("nombre_completo"));
+				rol.setDescripcion(rs.getString("descripcion"));
 			}
 
 		} catch (SQLException e) {
