@@ -13,7 +13,7 @@ public class RolDAOMySQL extends IpartekDAOMySQL implements RolDAO {
 	private final static String FIND_ALL = "SELECT * FROM roles";
 	private final static String FIND_BY_ID = "SELECT * FROM roles WHERE id = ?";
 	private final static String INSERT = "INSERT INTO roles (rol, descripcion)" + " VALUES (?, ?)";
-	private final static String UPDATE = "UPDATE roles " + "SET rol = ?, , descripcion = ?" + "WHERE id = ?";
+	private final static String UPDATE = "UPDATE roles " + "SET rol = ?, descripcion = ?" + "WHERE id = ?";
 	private final static String DELETE = "DELETE FROM roles WHERE id = ?";
 
 	private PreparedStatement psFindAll, psFindById, psInsert, psUpdate, psDelete;
@@ -108,8 +108,9 @@ public class RolDAOMySQL extends IpartekDAOMySQL implements RolDAO {
 		try {
 			psUpdate = con.prepareStatement(UPDATE);
 
-			psInsert.setString(1, rol.getRol());
-			psInsert.setString(2, rol.getDescripcion());
+			psUpdate.setString(1, rol.getRol());
+			psUpdate.setString(2, rol.getDescripcion());
+			psUpdate.setInt(3, rol.getId());
 
 			int res = psUpdate.executeUpdate();
 

@@ -9,11 +9,13 @@ import java.util.ArrayList;
 import com.ipartek.formacion.ejemplojdbc.Tipos.Factura;
 
 public class FacturaDAOMySQL extends IpartekDAOMySQL implements FacturaDAO {
-	private final static String FIND_ALL = "SELECT * FROM roles";
-	private final static String FIND_BY_ID = "SELECT * FROM roles WHERE id = ?";
-	private final static String INSERT = "INSERT INTO roles (rol, descripcion)" + " VALUES (?, ?)";
-	private final static String UPDATE = "UPDATE roles " + "SET rol = ?, , descripcion = ?" + "WHERE id = ?";
-	private final static String DELETE = "DELETE FROM roles WHERE id = ?";
+	private final static String FIND_ALL = "SELECT * FROM facturas";
+	private final static String FIND_BY_ID = "SELECT * FROM facturas WHERE id = ?";
+	private final static String INSERT = "INSERT INTO facturas (numero_factura, id_usuarios, fecha)"
+			+ " VALUES (?, ?, ?)";
+	private final static String UPDATE = "UPDATE facturas " + "SET numero_factura = ?, id_usuarios = ?,fecha = ?"
+			+ "WHERE id = ?";
+	private final static String DELETE = "DELETE FROM facturas WHERE id = ?";
 
 	private PreparedStatement psFindAll, psFindById, psInsert, psUpdate, psDelete;
 
@@ -32,7 +34,7 @@ public class FacturaDAOMySQL extends IpartekDAOMySQL implements FacturaDAO {
 				factura = new Factura();
 
 				factura.setId(rs.getInt("id"));
-				factura.setNúmero_factura(rs.getString("factura"));
+				factura.setNúmero_factura(rs.getString("numero_factura"));
 				factura.setId_usuarios(rs.getInt("id_usuarios"));
 				factura.setFecha(rs.getDate("fecha"));
 
@@ -61,7 +63,7 @@ public class FacturaDAOMySQL extends IpartekDAOMySQL implements FacturaDAO {
 				factura = new Factura();
 
 				factura.setId(rs.getInt("id"));
-				factura.setNúmero_factura(rs.getString("factura"));
+				factura.setNúmero_factura(rs.getString("numero_factura"));
 				factura.setId_usuarios(rs.getInt("id_usuarios"));
 				factura.setFecha(rs.getDate("fecha"));
 			}
@@ -110,9 +112,10 @@ public class FacturaDAOMySQL extends IpartekDAOMySQL implements FacturaDAO {
 		try {
 			psUpdate = con.prepareStatement(UPDATE);
 
-			psInsert.setString(1, factura.getNúmero_factura());
-			psInsert.setInt(2, factura.getId_usuarios());
-			psInsert.setDate(3, new java.sql.Date(factura.getFecha().getTime()));
+			psUpdate.setString(1, factura.getNúmero_factura());
+			psUpdate.setInt(2, factura.getId_usuarios());
+			psUpdate.setDate(3, new java.sql.Date(factura.getFecha().getTime()));
+			psUpdate.setInt(4, factura.getId());
 
 			int res = psUpdate.executeUpdate();
 

@@ -13,7 +13,7 @@ public class ProductoDAOMySQL extends IpartekDAOMySQL implements ProductoDAO {
 	private final static String FIND_ALL = "SELECT * FROM productos";
 	private final static String FIND_BY_ID = "SELECT * FROM productos WHERE id = ?";
 	private final static String INSERT = "INSERT INTO productos (nombre, precio)" + " VALUES (?, ?)";
-	private final static String UPDATE = "UPDATE productos " + "SET nombre = ?, , precio = ?" + "WHERE id = ?";
+	private final static String UPDATE = "UPDATE productos " + "SET nombre = ?, precio = ?" + " WHERE id = ?";
 	private final static String DELETE = "DELETE FROM productos WHERE id = ?";
 
 	private PreparedStatement psFindAll, psFindById, psInsert, psUpdate, psDelete;
@@ -108,8 +108,9 @@ public class ProductoDAOMySQL extends IpartekDAOMySQL implements ProductoDAO {
 		try {
 			psUpdate = con.prepareStatement(UPDATE);
 
-			psInsert.setString(1, producto.getNombre());
-			psInsert.setDouble(2, producto.getPrecio());
+			psUpdate.setString(1, producto.getNombre());
+			psUpdate.setDouble(2, producto.getPrecio());
+			psUpdate.setInt(3, producto.getId());
 
 			int res = psUpdate.executeUpdate();
 
