@@ -5,15 +5,46 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 
 import com.ipartek.formacion.ejemplojdbc.DAO.DAOException;
 import com.ipartek.formacion.ejemplojdbc.DAO.FacturaDAO;
 import com.ipartek.formacion.ejemplojdbc.DAO.FacturaDAOMySQL;
+import com.ipartek.formacion.ejemplojdbc.DAO.ProductoDAO;
+import com.ipartek.formacion.ejemplojdbc.DAO.ProductoDAOMySQL;
+import com.ipartek.formacion.ejemplojdbc.DAO.RolDAO;
+import com.ipartek.formacion.ejemplojdbc.DAO.RolDAOMySQL;
+import com.ipartek.formacion.ejemplojdbc.DAO.UsuarioDAO;
+import com.ipartek.formacion.ejemplojdbc.DAO.UsuarioDAOMySQL;
 import com.ipartek.formacion.ejemplojdbc.Tipos.Factura;
+import com.ipartek.formacion.ejemplojdbc.Tipos.Producto;
+import com.ipartek.formacion.ejemplojdbc.Tipos.Rol;
+import com.ipartek.formacion.ejemplojdbc.Tipos.Usuario;
 
 public class App {
+	public static UsuarioDAO daoUsuario = null;
+	public static RolDAO daoRol = null;
+	public static ProductoDAO daoProducto = null;
+	public static FacturaDAO daoFactura = null;
+
 	public static void main(String[] args) {
+
+		UsuarioDAO daoUsuarios = new UsuarioDAOMySQL();
+		daoUsuarios.abrir();
+		listadoUsuarios();
+		daoUsuarios.cerrar();
+		RolDAO daoRoles = new RolDAOMySQL();
+		daoRoles.abrir();
+		listadoRoles();
+		daoRoles.cerrar();
+		ProductoDAO daoProductos = new ProductoDAOMySQL();
+		daoProductos.abrir();
+		listadoProductos();
+		daoProductos.cerrar();
+		FacturaDAO daoFacturas = new FacturaDAOMySQL();
+		daoFacturas.abrir();
+		listadoFacturas();
+		daoFacturas.cerrar();
+
 		try {
 			// Comprobaciones DAO
 			// UsuarioDAO daoUsuarios = new UsuarioDAOMySQL();
@@ -22,8 +53,8 @@ public class App {
 			// daoRoles.abrir();
 			// ProductoDAO daoProductos = new ProductoDAOMySQL();
 			// daoProductos.abrir();
-			FacturaDAO daoFacturas = new FacturaDAOMySQL();
-			daoFacturas.abrir();
+			// FacturaDAO daoFacturas = new FacturaDAOMySQL();
+			// daoFacturas.abrir();
 
 			// comprobacion de FindAll
 			// for (Usuario u : daoUsuarios.findAll()){
@@ -32,9 +63,9 @@ public class App {
 			// System.out.println(r);}
 			// for (Producto p : daoProductos.findAll()){
 			// System.out.println(p);}
-			for (Factura f : daoFacturas.findAll()) {
-				System.out.println(f);
-			}
+			// for (Factura f : daoFacturas.findAll()) {
+			// System.out.println(f);
+			// }
 
 			// Comprobacion de FindById
 			// int id = 1;
@@ -46,9 +77,9 @@ public class App {
 			// int id = 1;
 			// Producto producto = daoProductos.findById(id);
 			// System.out.println("Producto ID: " + id + " = " + producto);
-			int id = 1;
-			Factura factura = daoFacturas.findById(id);
-			System.out.println("Factura ID: " + id + " = " + factura);
+			// int id = 1;
+			// Factura factura = daoFacturas.findById(id);
+			// System.out.println("Factura ID: " + id + " = " + factura);
 
 			// Comprobación insert
 			// Usuario usuario0 = new Usuario(0, 3, "PruebaUsuarios", "PUPass",
@@ -96,10 +127,11 @@ public class App {
 			// Producto prod2 = new Producto(4, "Ratón optico", 15);
 			// daoProductos.delete(prod2);
 			// System.out.println(daoProductos.findById(4));
-			@SuppressWarnings("deprecation")
-			Factura fact2 = new Factura(4, "NISU S.L.", 1, new Date(117, 5, 20));
-			daoFacturas.delete(fact2);
-			System.out.println(daoFacturas.findById(4));
+			// @SuppressWarnings("deprecation")
+			// Factura fact2 = new Factura(4, "NISU S.L.", 1, new Date(117, 5,
+			// 20));
+			// daoFacturas.delete(fact2);
+			// System.out.println(daoFacturas.findById(4));
 
 			// comprobacion de deleteID
 			// int id1 = 8;
@@ -126,6 +158,70 @@ public class App {
 				e.getCause().printStackTrace();
 			}
 		}
+	}
+
+	private static void listadoUsuarios() {
+
+		try {
+			System.out
+					.println("==========================================\nLISTADO USUARIOS\n==========================================");
+
+			for (Usuario u : daoUsuario.findAll()) {
+				System.out.println(u);
+			}
+			System.out.println();
+		} catch (Exception e) {
+			System.out.println("LISTADO DE USUARIOS IMPOSIBLE DE MOSTAR");
+		}
+
+	}
+
+	private static void listadoRoles() {
+
+		try {
+			System.out
+					.println("==========================================\nLISTADO ROLES\n==========================================");
+
+			for (Rol r : daoRol.findAll()) {
+				System.out.println(r);
+			}
+			System.out.println();
+		} catch (Exception e) {
+			System.out.println("LISTADO DE ROLES IMPOSIBLE DE MOSTAR");
+		}
+	}
+
+	private static void listadoProductos() {
+
+		try {
+			System.out
+					.println("==========================================\nLISTADO PRODUCTOS\n==========================================");
+
+			for (Producto p : daoProducto.findAll()) {
+				System.out.println(p);
+			}
+
+		} catch (Exception e) {
+			System.out.println("LISTADO DE PRODUCTOS IMPOSIBLE DE MOSTAR");
+		}
+		System.out.println();
+	}
+
+	private static void listadoFacturas() {
+
+		try {
+			System.out
+					.println("==========================================\nLISTADO FACTURAS\n==========================================");
+
+			for (Factura f : daoFactura.findAll()) {
+				System.out.println(f);
+			}
+
+			System.out.println();
+		} catch (Exception e) {
+			System.out.println("LISTADO DE FACTURAS IMPOSIBLE DE MOSTAR");
+		}
+
 	}
 
 	public static void mainBasico(String[] args) throws InstantiationException, IllegalAccessException,

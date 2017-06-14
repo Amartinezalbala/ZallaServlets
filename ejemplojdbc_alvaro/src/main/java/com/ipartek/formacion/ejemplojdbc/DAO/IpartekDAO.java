@@ -5,6 +5,8 @@ public interface IpartekDAO {
 
 	public void cerrar();
 
+	public void reutilizarConexion(IpartekDAO daoIpartek);
+
 	public void iniciarTransaccion();
 
 	public void confirmarTransaccion();
