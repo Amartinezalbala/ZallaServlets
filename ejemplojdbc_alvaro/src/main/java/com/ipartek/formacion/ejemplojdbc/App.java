@@ -16,31 +16,54 @@ import com.ipartek.formacion.ejemplojdbc.DAO.RolDAOMySQL;
 import com.ipartek.formacion.ejemplojdbc.DAO.UsuarioDAO;
 import com.ipartek.formacion.ejemplojdbc.DAO.UsuarioDAOMySQL;
 import com.ipartek.formacion.ejemplojdbc.Tipos.Factura;
+import com.ipartek.formacion.ejemplojdbc.Tipos.FacturaLinea;
 import com.ipartek.formacion.ejemplojdbc.Tipos.Producto;
 import com.ipartek.formacion.ejemplojdbc.Tipos.Rol;
 import com.ipartek.formacion.ejemplojdbc.Tipos.Usuario;
 
 public class App {
-	public static UsuarioDAO daoUsuario = null;
-	public static RolDAO daoRol = null;
-	public static ProductoDAO daoProducto = null;
-	public static FacturaDAO daoFactura = null;
+	public static UsuarioDAO daoUsuarios = null;
+	public static RolDAO daoRoles = null;
+	public static ProductoDAO daoProductos = null;
+	public static FacturaDAO daoFacturas = null;
+	public static Factura visionado;
 
 	public static void main(String[] args) {
 
-		UsuarioDAO daoUsuarios = new UsuarioDAOMySQL();
+		// visionado factura y productos con nombre completo
+
+		try {
+			FacturaDAO dao = new FacturaDAOMySQL();
+
+			dao.abrir();
+
+			for (Factura f : dao.findAll()) {
+				for (FacturaLinea fl : dao.findAllLineas(f.getId())) {
+					System.out.println("" + fl.getCantidad() + ", " + fl.getProducto());
+				}
+			}
+
+			Factura factura = dao.findByIdFacturaCompleta(2);
+
+			System.out.println(factura);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// listado de las tablas
+		daoUsuarios = new UsuarioDAOMySQL();
 		daoUsuarios.abrir();
 		listadoUsuarios();
 		daoUsuarios.cerrar();
-		RolDAO daoRoles = new RolDAOMySQL();
+		daoRoles = new RolDAOMySQL();
 		daoRoles.abrir();
 		listadoRoles();
 		daoRoles.cerrar();
-		ProductoDAO daoProductos = new ProductoDAOMySQL();
+		daoProductos = new ProductoDAOMySQL();
 		daoProductos.abrir();
 		listadoProductos();
 		daoProductos.cerrar();
-		FacturaDAO daoFacturas = new FacturaDAOMySQL();
+		daoFacturas = new FacturaDAOMySQL();
 		daoFacturas.abrir();
 		listadoFacturas();
 		daoFacturas.cerrar();
@@ -166,12 +189,13 @@ public class App {
 			System.out
 					.println("==========================================\nLISTADO USUARIOS\n==========================================");
 
-			for (Usuario u : daoUsuario.findAll()) {
+			for (Usuario u : daoUsuarios.findAll()) {
 				System.out.println(u);
 			}
 			System.out.println();
 		} catch (Exception e) {
 			System.out.println("LISTADO DE USUARIOS IMPOSIBLE DE MOSTAR");
+			e.printStackTrace();
 		}
 
 	}
@@ -182,12 +206,13 @@ public class App {
 			System.out
 					.println("==========================================\nLISTADO ROLES\n==========================================");
 
-			for (Rol r : daoRol.findAll()) {
+			for (Rol r : daoRoles.findAll()) {
 				System.out.println(r);
 			}
 			System.out.println();
 		} catch (Exception e) {
 			System.out.println("LISTADO DE ROLES IMPOSIBLE DE MOSTAR");
+			e.printStackTrace();
 		}
 	}
 
@@ -197,14 +222,14 @@ public class App {
 			System.out
 					.println("==========================================\nLISTADO PRODUCTOS\n==========================================");
 
-			for (Producto p : daoProducto.findAll()) {
+			for (Producto p : daoProductos.findAll()) {
 				System.out.println(p);
 			}
-
+			System.out.println();
 		} catch (Exception e) {
 			System.out.println("LISTADO DE PRODUCTOS IMPOSIBLE DE MOSTAR");
+			e.printStackTrace();
 		}
-		System.out.println();
 	}
 
 	private static void listadoFacturas() {
@@ -213,10 +238,9 @@ public class App {
 			System.out
 					.println("==========================================\nLISTADO FACTURAS\n==========================================");
 
-			for (Factura f : daoFactura.findAll()) {
+			for (Factura f : daoFacturas.findAll()) {
 				System.out.println(f);
 			}
-
 			System.out.println();
 		} catch (Exception e) {
 			System.out.println("LISTADO DE FACTURAS IMPOSIBLE DE MOSTAR");

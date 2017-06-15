@@ -1,6 +1,7 @@
 package com.ipartek.formacion.ejemplojdbc.DAO;
 
 import com.ipartek.formacion.ejemplojdbc.Tipos.Factura;
+import com.ipartek.formacion.ejemplojdbc.Tipos.FacturaLinea;
 
 public interface FacturaDAO extends IpartekDAO {
 	public Factura[] findAll();
@@ -14,4 +15,8 @@ public interface FacturaDAO extends IpartekDAO {
 	public void delete(Factura factura);
 
 	public void delete(int id);
+
+	public FacturaLinea[] findAllLineas(int idFactura);
+
+	public Factura findByIdFacturaCompleta(int id);
 }

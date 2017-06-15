@@ -18,7 +18,7 @@ public class Usuario {
 	}
 
 	public Usuario() {
-		System.out.println("CONSTRUCTOR USUARIO VACIO");
+		// System.out.println("CONSTRUCTOR USUARIO VACIO");
 	}
 
 	public int getId() {

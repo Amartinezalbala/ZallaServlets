@@ -21,6 +21,11 @@ public class FacturaDAOMySQL extends IpartekDAOMySQL implements FacturaDAO {
 
 	private final static String FIND_ALL_LINEAS = "SELECT * FROM facturas_productos WHERE id_facturas = ?";
 
+	// private final static String FIND_NOMBRE_COMPLETO =
+	// "SELECT nombre_completo"
+	// +
+	// " FROM usuarios u, facturas f, facturas_productos fp WHERE u.id = f.id_usuarios AND f.id = fp.id_facturas";
+
 	private PreparedStatement psFindAll, psFindById, psInsert, psUpdate, psDelete, psFindAllLineas;
 
 	public Factura[] findAll() {
@@ -213,9 +218,16 @@ public class FacturaDAOMySQL extends IpartekDAOMySQL implements FacturaDAO {
 
 	public Factura findByIdFacturaCompleta(int id) {
 		Factura factura = findById(id);
+
+		UsuarioDAO daoUsuario = new UsuarioDAOMySQL();
+		daoUsuario.reutilizarConexion(this);
+
+		factura.setUsuario(daoUsuario.findById(factura.getId_usuarios()));
+
 		for (FacturaLinea fl : findAllLineas(factura.getId())) {
 			factura.addProductoYCantidad(fl.getProducto(), fl.getCantidad());
 		}
+
 		return factura;
 	}
 

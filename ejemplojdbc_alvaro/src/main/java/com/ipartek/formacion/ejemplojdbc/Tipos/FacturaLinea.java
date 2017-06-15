@@ -11,7 +11,7 @@ public class FacturaLinea {
 	}
 
 	public FacturaLinea() {
-		System.out.println("CONTRUCTOR FACTURALINEA VACIO");
+		// System.out.println("CONTRUCTOR FACTURALINEA VACIO");
 	}
 
 	public Producto getProducto() {

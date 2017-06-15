@@ -14,7 +14,7 @@ public class Producto {
 	}
 
 	public Producto() {
-		System.out.println("CONSTRUCTOR PRODUCTO VACIO");
+		// System.out.println("CONSTRUCTOR PRODUCTO VACIO");
 	}
 
 	public int getId() {

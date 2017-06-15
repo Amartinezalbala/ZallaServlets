@@ -9,6 +9,7 @@ public class Factura {
 	private int id;
 	private String número_factura;
 	private int id_usuarios;
+	private Usuario usuario;
 	private Date fecha;
 
 	private List<FacturaLinea> lineas = new ArrayList<FacturaLinea>();
@@ -22,7 +23,7 @@ public class Factura {
 	}
 
 	public Factura() {
-		System.out.println("CONSTRUCTOR FACTURA  VACIO");
+		// System.out.println("CONSTRUCTOR FACTURA  VACIO");
 	}
 
 	public int getId() {
@@ -112,8 +113,16 @@ public class Factura {
 
 	@Override
 	public String toString() {
-		return "Factura [id=" + id + ", número_factura=" + número_factura + ", id_usuarios=" + id_usuarios + ", fecha="
-				+ fecha + "]";
+		return "Factura [id=" + id + ", número_factura=" + número_factura + ", usuario=" + usuario + ", fecha=" + fecha
+				+ "]";
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }
