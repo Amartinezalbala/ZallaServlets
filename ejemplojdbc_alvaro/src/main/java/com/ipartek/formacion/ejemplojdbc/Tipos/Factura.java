@@ -10,6 +10,7 @@ public class Factura {
 	private String número_factura;
 	private int id_usuarios;
 	private Usuario usuario;
+	private Producto producto;
 	private Date fecha;
 
 	private List<FacturaLinea> lineas = new ArrayList<FacturaLinea>();
@@ -123,6 +124,14 @@ public class Factura {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public Producto getProducto() {
+		return producto;
+	}
+
+	public void setProducto(Producto producto) {
+		this.producto = producto;
 	}
 
 }

@@ -19,4 +19,6 @@ public interface FacturaDAO extends IpartekDAO {
 	public FacturaLinea[] findAllLineas(int idFactura);
 
 	public Factura findByIdFacturaCompleta(int id);
+
+	public void insertLinea(FacturaLinea linea);
 }

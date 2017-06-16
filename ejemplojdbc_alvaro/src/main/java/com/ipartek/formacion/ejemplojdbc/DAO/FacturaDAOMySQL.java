@@ -178,10 +178,14 @@ public class FacturaDAOMySQL extends IpartekDAOMySQL implements FacturaDAO {
 	}
 
 	public void insertLinea(FacturaLinea linea) {
-
+		ArrayList<FacturaLinea>  = new ArrayList<FacturaLinea>();
+		lineas.add(linea);
 	}
 
+	@SuppressWarnings("null")
 	public void deleteLinea(Producto producto) {
+		ProductoDAO daoProducto = null;
+		daoProducto.delete(producto.getId());
 
 	}
 
