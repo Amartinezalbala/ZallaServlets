@@ -18,15 +18,19 @@ public class FacturaDAOMySQL extends IpartekDAOMySQL implements FacturaDAO {
 	private final static String UPDATE = "UPDATE facturas " + "SET numero_factura = ?, id_usuarios = ?,fecha = ?"
 			+ "WHERE id = ?";
 	private final static String DELETE = "DELETE FROM facturas WHERE id = ?";
-
 	private final static String FIND_ALL_LINEAS = "SELECT * FROM facturas_productos WHERE id_facturas = ?";
+	private final static String FIND_LINEA_CANTIDAD = "SELECT * FROM facturas_productos WHERE id_facturas = ? AND id_productos = ?";
+	private final static String UPDATE_LINEA_CANTIDAD = "UPDATE facturas_productos SET cantidad = ? WHERE id_facturas = ? AND id_productos = ?";
+	private final static String DELETE_LINEA = "DELETE FROM facturas_productos WHERE id_facturas = ? AND id_productos = ?";
+	private final static String INSERT_LINEA = "INSERT INTO facturas_productos (id_facturas, id_productos, cantidad) VALUES (?, ?, ?)";
 
 	// private final static String FIND_NOMBRE_COMPLETO =
 	// "SELECT nombre_completo"
 	// +
 	// " FROM usuarios u, facturas f, facturas_productos fp WHERE u.id = f.id_usuarios AND f.id = fp.id_facturas";
 
-	private PreparedStatement psFindAll, psFindById, psInsert, psUpdate, psDelete, psFindAllLineas;
+	private PreparedStatement psFindAll, psFindById, psInsert, psUpdate, psDelete, psFindAllLineas,
+			psFindLineaCantidad, psUpdateLineaCantidad, psDeleteLinea, psInsertLinea;
 
 	public Factura[] findAll() {
 		ArrayList<Factura> facturas = new ArrayList<Factura>();
@@ -61,28 +65,31 @@ public class FacturaDAOMySQL extends IpartekDAOMySQL implements FacturaDAO {
 	public Factura findById(int id) {
 		Factura factura = null;
 		ResultSet rs = null;
+		if (true) {
+			try {
+				psFindById = con.prepareStatement(FIND_BY_ID);
 
-		try {
-			psFindById = con.prepareStatement(FIND_BY_ID);
+				psFindById.setInt(1, id);
+				rs = psFindById.executeQuery();
 
-			psFindById.setInt(1, id);
-			rs = psFindById.executeQuery();
+				if (rs.next()) {
+					factura = new Factura();
 
-			if (rs.next()) {
-				factura = new Factura();
+					factura.setId(rs.getInt("id"));
+					factura.setNúmero_factura(rs.getString("numero_factura"));
+					factura.setId_usuarios(rs.getInt("id_usuarios"));
+					factura.setFecha(rs.getDate("fecha"));
+				}
 
-				factura.setId(rs.getInt("id"));
-				factura.setNúmero_factura(rs.getString("numero_factura"));
-				factura.setId_usuarios(rs.getInt("id_usuarios"));
-				factura.setFecha(rs.getDate("fecha"));
+			} catch (SQLException e) {
+				throw new DAOException("Error en FindById", e);
+			} finally {
+				cerrar(psFindById, rs);
 			}
 
-		} catch (SQLException e) {
-			throw new DAOException("Error en FindById", e);
-		} finally {
-			cerrar(psFindById, rs);
 		}
 		return factura;
+
 	}
 
 	public int insert(Factura factura) {
@@ -177,23 +184,96 @@ public class FacturaDAOMySQL extends IpartekDAOMySQL implements FacturaDAO {
 		}
 	}
 
-	public void insertLinea(FacturaLinea linea) {
-		ArrayList<FacturaLinea>  = new ArrayList<FacturaLinea>();
-		lineas.add(linea);
+	public void insertLinea(int id_facturas, int id_productos, int cantidad) {
+		try {
+			// INSERTAR EN FACTURAS_PRODUCTOS LOS DATOS DE FACTURA_LINEA
+			psInsertLinea = con.prepareStatement(INSERT_LINEA);
+
+			psInsertLinea.setInt(1, id_facturas);
+			psInsertLinea.setInt(2, id_productos);
+			psInsertLinea.setInt(3, cantidad);
+
+			int res = psInsertLinea.executeUpdate();
+
+			if (res != 1) {
+				throw new DAOException("La inserción de linea ha devuelto un valor " + res);
+			}
+
+		} catch (Exception e) {
+			System.out.println("IMPOSIBLE INSERTLINEA");
+		}
+
 	}
 
-	@SuppressWarnings("null")
-	public void deleteLinea(Producto producto) {
-		ProductoDAO daoProducto = null;
-		daoProducto.delete(producto.getId());
+	public void deleteLinea(int idFactura, int idProducto) {
+		try {
+			// BORRAR LINEA EN FACTURAS_PRODUCTOS QUE CORRESPONDA AL ID PRODUCTO
+			// E ID FACTURA
+			psDeleteLinea = con.prepareStatement(DELETE_LINEA);
+
+			psDeleteLinea.setInt(1, idFactura);
+			psDeleteLinea.setInt(2, idProducto);
+
+			int res = psDeleteLinea.executeUpdate();
+
+			if (res != 1) {
+				System.out.println("BORRADO LÍNEA REALIZADA");
+			} else {
+				System.out.println("BORRADO LÍNEA NO REALIZADA");
+			}
+		} catch (Exception e) {
+			System.out.println("IMPOSIBLE DELETELINEA");
+		}
+	}
+
+	public void updateLinea(int idFactura, int idProducto, int cantidad) {
+		try {
+			// BUSCAR LA LINEA SEGUN EL ID DE PRODUCTO E ID DE FACTURA Y CAMBIAR
+			// LA CANTIDAD
+			psUpdateLineaCantidad = con.prepareStatement(UPDATE_LINEA_CANTIDAD);
+
+			psUpdateLineaCantidad.setInt(1, cantidad);
+			psUpdateLineaCantidad.setInt(2, idFactura);
+			psUpdateLineaCantidad.setInt(3, idProducto);
+
+			int res = psUpdateLineaCantidad.executeUpdate();
+			if (res == 1) {
+				System.out.println("ACTUALIZACIÓN CANTIDAD REALIZADA");
+			} else {
+				System.out.println("ACTUALIZACIÓN CANTIDAD NO REALIZADA");
+			}
+		} catch (Exception e) {
+			System.out.println("IMPOSIBLE UPDATELINEA");
+		}
 
 	}
 
-	public void updateLinea(FacturaLinea linea) {
+	public FacturaLinea findLineaByProductoId(int idFactura, int idProducto) {
+		Factura factura = findById(idFactura);
+		ResultSet rs = null;
+		FacturaLinea facturaLinea = null;
+		try {
+			// BUSCAR EN SQL ID FACTURA e ID PRODUCTO EN FACTURAS_PRODUCTOS
+			psFindLineaCantidad = con.prepareStatement(FIND_LINEA_CANTIDAD);
+			psFindLineaCantidad.setInt(1, idFactura);
+			psFindLineaCantidad.setInt(2, idProducto);
+			rs = psFindLineaCantidad.executeQuery();
+			ProductoDAO daoProducto = new ProductoDAOMySQL();
+			daoProducto.reutilizarConexion(this);
+			Producto producto = daoProducto.findById(idProducto);
 
-	}
+			if (rs.next()) {
+				facturaLinea = new FacturaLinea();
+				facturaLinea.setFactura(factura);
+				facturaLinea.setProducto(producto);
+				int cantidad = rs.getInt("cantidad");
+				facturaLinea.setCantidad(cantidad);
+			}
 
-	public void findLineaByProductoId(int idFactura, int idProducto) {
+		} catch (Exception e) {
+			System.out.println("IMPOSIBLE FINDLINEABYPRODUCTOID");
+		}
+		return facturaLinea;
 
 	}
 
@@ -226,13 +306,28 @@ public class FacturaDAOMySQL extends IpartekDAOMySQL implements FacturaDAO {
 		UsuarioDAO daoUsuario = new UsuarioDAOMySQL();
 		daoUsuario.reutilizarConexion(this);
 
-		factura.setUsuario(daoUsuario.findById(factura.getId_usuarios()));
-
-		for (FacturaLinea fl : findAllLineas(factura.getId())) {
-			factura.addProductoYCantidad(fl.getProducto(), fl.getCantidad());
+		if (factura != null) {
+			factura.setUsuario(daoUsuario.findById(factura.getId_usuarios()));
+			for (FacturaLinea fl : findAllLineas(factura.getId())) {
+				factura.addProductoYCantidad(fl.getProducto(), fl.getCantidad());
+			}
+		} else {
+			System.out.println("NO EXISTE ID INDICADO");
 		}
-
 		return factura;
+	}
+
+	public void updateLinea(int idFactura, FacturaLinea linea) {
+		updateLinea(idFactura, linea.getProducto().getId(), linea.getCantidad());
+
+	}
+
+	public void insertLinea(FacturaLinea linea) {
+		insertLinea(linea.getFactura().getId(), linea.getProducto().getId(), linea.getCantidad());
+	}
+
+	public void deleteLinea(FacturaLinea linea) {
+		deleteLinea(linea.getFactura().getId(), linea.getProducto().getId());
 	}
 
 }

@@ -3,6 +3,7 @@ package com.ipartek.formacion.ejemplojdbc.Tipos;
 public class FacturaLinea {
 	private Producto producto;
 	private int cantidad;
+	private Factura factura;
 
 	public FacturaLinea(Producto producto, int cantidad) {
 		super();
@@ -60,7 +61,15 @@ public class FacturaLinea {
 
 	@Override
 	public String toString() {
-		return "Linea [producto=" + producto + ", cantidad=" + cantidad + "]";
+		return "Linea= " + producto + ", CANTIDAD = " + cantidad + " UNIDAD(ES)]";
+	}
+
+	public Factura getFactura() {
+		return factura;
+	}
+
+	public void setFactura(Factura factura) {
+		this.factura = factura;
 	}
 
 }
