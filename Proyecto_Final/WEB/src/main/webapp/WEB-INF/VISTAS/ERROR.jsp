@@ -1,9 +1,10 @@
-<%@include file="includes/cabecera.jsp" %>
-<<!DOCTYPE title PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<title>Error</title>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:set var="titulo" value="ERROR" />
+<%@ include file="INCLUDES/CABECERA.jsp" %>
 </head>
 <body>
-	<h1>Error</h1>
-	<%@ include file="includes/PIE.jsp" %>
+	<h1>ERROR</h1>
+	<%@ include file="INCLUDES/PIE.jsp" %>
 </body>
 </html>
