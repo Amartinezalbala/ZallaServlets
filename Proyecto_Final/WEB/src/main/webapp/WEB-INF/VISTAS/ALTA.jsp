@@ -7,14 +7,20 @@
 	
 	<form >
 		<fieldset>
-			<label for="nombre">USUARIO : </label> <input 
+			<label for="user"><strong>USUARIO : </strong></label> <input 
 			required = "required" minlength="6" />
 		</fieldset>
 		<fieldset>
-			<label for="pass">CONTRASEÑA : </label> <input  />
+			<label for="name"><strong>NOMBRE COMPLETO : </strong></label> <input 
+			required = "required" minlength="6" />
 		</fieldset>
 		<fieldset>
-			<label for="pass2">REPITE CONTRASEÑA : </label> <input />
+			<label for="pass"><strong>CONTRASEÑA : </strong></label> <input 
+			required = "required" minlength="6"   />
+		</fieldset>
+		<fieldset>
+			<label for="pass2"><strong>REPITE CONTRASEÑA : </strong></label> <input 
+			required = "required" minlength="6"  />
 		</fieldset>
 		<fieldset>
 			<input type="submit" value="LOGIN" />

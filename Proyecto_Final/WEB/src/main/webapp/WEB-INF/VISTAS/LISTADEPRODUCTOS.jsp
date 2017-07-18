@@ -9,16 +9,14 @@
   			<th>CODIGO</th>
     		<th>NOMBRE</th>
     		<th>PRECIO</th>
-    		<th>CANTIDAD</th>
   		</tr>
   	</thead>
   	<tbody>
-  		<c:forEach items="" var="producto">
+  		<c:forEach items="${productos}" var="producto">
   			<tr>
-    				<td></td>
-    				<td></td>
-					<td></td>
-					<td></td>
+    				<td>${producto.id}</td>
+    				<td>${producto.nombre}</td>
+					<td>${producto.precio}</td>
     		</tr>
     	</c:forEach>
     </tbody>
